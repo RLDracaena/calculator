@@ -20,6 +20,7 @@ backspaceButton.disabled = true;
 numberButtons.forEach(button => button.addEventListener("click", () => {
     operatorButtons.forEach(button => button.disabled = false)
     decimalButton.disabled = false
+    backspaceButton.disabled = false
     toggleNegativeButton.disabled = false
     
 
@@ -55,6 +56,7 @@ operatorButtons.forEach(button => button.addEventListener("click", () => {
     operatorButtons.forEach(button => button.disabled = true)
     decimalButton.disabled = true
     toggleNegativeButton.disabled = true
+    backspaceButton.disabled = true
     numbers.push(Number(display.textContent))
     console.log(numbers)
     currentOperator = button.textContent
@@ -101,6 +103,16 @@ toggleNegativeButton.addEventListener("click", () => {
 
 allClearButton.addEventListener("click", clearAll)
 
+backspaceButton.addEventListener("click", deleteItem)
+
+
+function deleteItem() {
+    let length = display.textContent.toString().length
+    display.textContent = display.textContent.substring(0, length-1)
+    checkDecimalStatus()
+
+}
+
 
 function clearAll() {
     allClearPressed = true
@@ -110,6 +122,7 @@ function clearAll() {
     numberButtons.forEach(button => button.disabled = false)
     operatorButtons.forEach(button => button.disabled = false)
     decimalButton.disabled = false
+    backspaceButton.disabled = true
     toggleNegativeButton.disabled = false
     equalsPressed = false
     decimalPressed = false
